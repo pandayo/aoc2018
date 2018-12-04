@@ -67,7 +67,7 @@ print(dfIDSum.loc[dfComplete].idxmax())
 print("--------------------")
 print(int(dfIDSum.loc[dfComplete].idxmax())*int(dfComplete))
 dfIDMean = dfSummed.\
-     groupby(["ID"]).aggregate('mean')
+     groupby(["ID"]).aggregate('sum')
 print("--------------------")
 print("-     Part Two     -")
 print("--------------------")
