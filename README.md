@@ -8,3 +8,6 @@ It took a while to understand, what the hash sum is supposed to be. You are not 
 
 ### 3rd Dec ###
 Solved it completly unoptimised. Hacked together a solution :/ It takes len(lines)^2 + len(lines) * id.x_length * id.y_lenght as it is not optimised. There is probably a solution using only a single loop, but i can't wrap my head around it using only lists, dicts, booleans, strings and integers. :(
+
+### 4th Dec ###
+Sad panda is sad. No solution today. I can't quite grasp the problem it seems.
