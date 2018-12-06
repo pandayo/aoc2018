@@ -14,3 +14,6 @@ Sad panda is sad. No solution today. I can't quite grasp the problem it seems.
 
 ### 5th Dec ###
 Reading the assignment would help a lot in improving time to produce a solution. -.-
+
+### 6th Dec ###
+Took me forever to solve the first problem. Pretty sure I wasn't deciding whether a coordinate was infinite or not. Yet with the help of reddit, I got it working. And afterwards, getting Part II was like adding 7 lines of code and took like 2 minutes. I'm pretty happy about that :)
