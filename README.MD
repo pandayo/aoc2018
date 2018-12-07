@@ -17,3 +17,6 @@ Reading the assignment would help a lot in improving time to produce a solution.
 
 ### 6th Dec ###
 Took me forever to solve the first problem. Pretty sure I wasn't deciding whether a coordinate was infinite or not. Yet with the help of reddit, I got it working. And afterwards, getting Part II was like adding 7 lines of code and took like 2 minutes. I'm pretty happy about that :)
+
+### 7th Dec ###
+Reading the assignment would be helpful again. I was not checking all available tasks alphabetically but just the available ones in this task tree at first. Figured the solution out afterwards pretty quickly and the part II was fairly easy afterwards :)
