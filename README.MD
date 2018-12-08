@@ -20,3 +20,6 @@ Took me forever to solve the first problem. Pretty sure I wasn't deciding whethe
 
 ### 7th Dec ###
 Reading the assignment would be helpful again. I was not checking all available tasks alphabetically but just the available ones in this task tree at first. Figured the solution out afterwards pretty quickly and the part II was fairly easy afterwards :)
+
+### 8th Dec ###
+This one was pretty easy and straight forward. :)
