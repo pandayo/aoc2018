@@ -23,3 +23,6 @@ Reading the assignment would be helpful again. I was not checking all available 
 
 ### 8th Dec ###
 This one was pretty easy and straight forward. :)
+
+### 9th Dec ###
+The first part was pretty straight forward, for the second part, the puzzle input was extremly large and my first solution would have taken probably about an hour to determine the solution. With the help of reddit, I updated to deque and it run super fast. :)
