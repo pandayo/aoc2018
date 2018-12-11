@@ -28,3 +28,9 @@ This one was pretty easy and straight forward. :)
 The first part was pretty straight forward, for the second part, the puzzle input was extremly large and my first solution would have taken probably about an hour to determine the solution. With the help of reddit, I updated to deque and it run super fast. :)
 
 Short update: My naiive solution takes 2.5h to process 1.4 million marbles. It seems like this would be no good use for the handheld you took with you to save christmas :D
+
+### 10th Dec ###
+Was sick and also had no idea how to solve the problem.
+
+### 11th Dec ###
+Learned some numpy today :)
