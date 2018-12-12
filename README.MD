@@ -34,3 +34,7 @@ Was sick and also had no idea how to solve the problem.
 
 ### 11th Dec ###
 Learned some numpy today :)
+
+### 12th Dec ###
+Puzzle was a type of Game of Life. The most confusing was I had to add the negative indices as well, which was not coming out of the instructions initially. Luckily, this time I'm not the only one having this problem :D
+As usually since day 9, I had to get help with the approach to part II, solving it afterwards was pretty straight forward :)
