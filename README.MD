@@ -41,3 +41,6 @@ As usually since day 9, I had to get help with the approach to part II, solving 
 
 ### 13th Dec ###
 I'm kinda sick, it's kinda late, but I took the last two hours to solve the first part of todays puzzle. I hate not being able to determine left from right -.-
+
+### 14th Dec ###
+Part I was pretty straight forward, Part II took me a while. Reddit helped again, my solution of using Strings was inefficent.
