@@ -1,12 +1,3 @@
-class carsHit(Exception):
-    def __init__(self, y, x):
-        super()
-        self.x = x
-        self.y = y
-
-    def getCoords(self):
-        return(self.x,self.y)
-
 def printMap(arr_of_arr):
     output = ""
     for arr in arr_of_arr:
@@ -21,10 +12,11 @@ def printCarsOnMap(track, cars):
         printTrack[car[0]][car[1]] = car[2]
     printMap(printTrack)
 
-def move(track, cars):
+def move(track, cars, counter):
     cars = sorted(cars, key = lambda el: (el[0], el[1]))
     newCars = []
     pos = set()
+    destroyed = set()
     for car in cars:
         node = (car[0],car[1])
         pos.add(node)
@@ -34,79 +26,98 @@ def move(track, cars):
         pos.remove((x,y))
         direction = car[2]
         count = car[3]
-        if direction == "<":
-            y = y-1
-            if not (x,y) in pos:
-                pos.add((x,y))
-            else:
-                raise carsHit(x,y)
-            if track[x][y] == "\\":
-                direction = "^"
-            if track[x][y] == "/":
-                direction = "v"
-            if track[x][y] == "+":
-                if count % 3 == 0:
-                    direction = "v"
-                if count % 3 == 2:
+        car_destroyed=False
+        if not (x,y) in destroyed:
+            if direction == "<":
+                y = y-1
+                if not (x,y) in pos:
+                    pos.add((x,y))
+                else:
+                    print("{0}: cars hit at ({1},{2})".
+                          format(counter,y,x))
+                    destroyed.add((x,y))
+                    car_destroyed = True
+                if track[x][y] == "\\":
                     direction = "^"
-                count += 1
-            newCars.append((x,y,direction,count))
-            continue
-        if direction == ">":
-            y = y+1
-            if not (x,y) in pos:
-                pos.add((x,y))
-            else:
-                raise carsHit(x,y)
-            if track[x][y] == "/":
-                direction = "^"
-            if track[x][y] == "\\":
-                direction = "v"
-            if track[x][y] == "+":
-                if count % 3 == 0:
-                    direction = "^"
-                if count % 3 == 2:
+                if track[x][y] == "/":
                     direction = "v"
-                count += 1
-            newCars.append((x,y,direction,count))
-            continue
-        if direction == "^":
-            x = x-1
-            if not (x,y) in pos:
-                pos.add((x,y))
-            else:
-                raise carsHit(x,y)
-            if track[x][y] == "\\":
-                direction = "<"
-            if track[x][y] == "/":
-                direction = ">"
-            if track[x][y] == "+":
-                if count % 3 == 0:
+                if track[x][y] == "+":
+                    if count % 3 == 0:
+                        direction = "v"
+                    if count % 3 == 2:
+                        direction = "^"
+                    count += 1
+                if not car_destroyed:
+                    newCars.append((x,y,direction,count))
+                continue
+            if direction == ">":
+                y = y+1
+                if not (x,y) in pos:
+                    pos.add((x,y))
+                else:
+                    print("{0}: cars hit at ({1},{2})".
+                          format(counter,y,x))
+                    destroyed.add((x,y))
+                    car_destroyed = True
+                if track[x][y] == "/":
+                    direction = "^"
+                if track[x][y] == "\\":
+                    direction = "v"
+                if track[x][y] == "+":
+                    if count % 3 == 0:
+                        direction = "^"
+                    if count % 3 == 2:
+                        direction = "v"
+                    count += 1
+                if not car_destroyed:
+                    newCars.append((x,y,direction,count))
+                continue
+            if direction == "^":
+                x = x-1
+                if not (x,y) in pos:
+                    pos.add((x,y))
+                else:
+                    print("{0}: cars hit at ({1},{2})".
+                          format(counter,y,x))
+                    destroyed.add((x,y))
+                    car_destroyed = True
+                if track[x][y] == "\\":
                     direction = "<"
-                if count % 3 == 2:
+                if track[x][y] == "/":
                     direction = ">"
-                count += 1
-            newCars.append((x,y,direction,count))
-            continue
-        if direction == "v":
-            x = x+1
-            if not (x,y) in pos:
-                pos.add((x,y))
-            else:
-                raise carsHit(x,y)
-            if track[x][y] == "\\":
-                direction = ">"
-            if track[x][y] == "/":
-                direction = "<"
-            if track[x][y] == "+":
-                if count % 3 == 0:
+                if track[x][y] == "+":
+                    if count % 3 == 0:
+                        direction = "<"
+                    if count % 3 == 2:
+                        direction = ">"
+                    count += 1
+                if not car_destroyed:
+                    newCars.append((x,y,direction,count))
+                continue
+            if direction == "v":
+                x = x+1
+                if not (x,y) in pos:
+                    pos.add((x,y))
+                else:
+                    print("{0}: cars hit at ({1},{2})".
+                          format(counter,y,x))
+                    destroyed.add((x,y))
+                    car_destroyed = True
+                if track[x][y] == "\\":
                     direction = ">"
-                if count % 3 == 2:
+                if track[x][y] == "/":
                     direction = "<"
-                count += 1
-            newCars.append((x,y,direction,count))
-            continue
-    return(newCars)
+                if track[x][y] == "+":
+                    if count % 3 == 0:
+                        direction = ">"
+                    if count % 3 == 2:
+                        direction = "<"
+                    count += 1
+                if not car_destroyed:
+                    newCars.append((x,y,direction,count))
+                continue
+    nC = [car for car in newCars if (car[0], car[1]) not in destroyed]
+    return(nC)
 
 lines = open("input.txt").read().splitlines()
 
@@ -114,7 +125,6 @@ cLines = [[x for x in y] for y in lines]
 cars = {">":"-", "<":"-", "v":"|", "^":"|"}
 
 carPos = []
-crash = False
 
 for i, cL in enumerate(cLines):
     for j, c in enumerate(cL):
@@ -138,14 +148,11 @@ for i, cL in enumerate(cLines):
                         clines[i][j] = "+"
 printMap(cLines)
 print(carPos)
+print(len(carPos))
 counter = 0
 
-while not crash:
-    try:
-        carPos = move(cLines, carPos)
-        counter += 1
-        printCarsOnMap(cLines, carPos)
-    except carsHit as e:
-        crash = True
-        print(counter)
-        print(e.getCoords())
+while len(carPos) > 1:
+    carPos = move(cLines, carPos, counter)
+    counter += 1
+    #printCarsOnMap(cLines, carPos)
+print(carPos)
