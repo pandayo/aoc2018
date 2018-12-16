@@ -44,3 +44,6 @@ I'm kinda sick, it's kinda late, but I took the last two hours to solve the firs
 
 ### 14th Dec ###
 Part I was pretty straight forward, Part II took me a while. Reddit helped again, my solution of using Strings was inefficent.
+
+### 15th Dec ###
+Whilst I got the right solution on the example input, I guess my a* runtime takes to long on the 30x30 grid of the puzzle input. How unforetunate, I thought that might be a fast algorithm :(
