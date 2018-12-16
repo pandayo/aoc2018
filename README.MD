@@ -47,3 +47,6 @@ Part I was pretty straight forward, Part II took me a while. Reddit helped again
 
 ### 15th Dec ###
 Whilst I got the right solution on the example input, I guess my a* runtime takes to long on the 30x30 grid of the puzzle input. How unforetunate, I thought that might be a fast algorithm :(
+
+### 16th Dec ###
+Fun little puzzle
