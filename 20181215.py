@@ -22,18 +22,23 @@ def bfs(maze, start, end, wall = 1):
     height = len(maze)    
     queue = collections.deque([[start]])
     seen = set([start])
+    paths = []
     while queue:
         path = queue.popleft()
         y, x = path[-1]
         if (y,x) == end:
-            return path
-        for i in [-1,1]:
-            if width > x+i >= 0 and maze[y][x+i] != wall and (y,x+i) not in seen:
-                queue.append(path + [(y, x+i)])
-                seen.add((y,x+i))
-            if height > y+i >= 0 and maze[y+i][x] != wall and (y+i,x) not in seen:
-                queue.append(path + [(y+i, x)])
-                seen.add((y+i,x))
+            paths.append(path)
+            continue
+        for (yi,xi) in [(y-1, x), (y, x-1), (y, x+1), (y+1, x)]:
+            if width > xi >= 0 and maze[yi][xi] != wall and (yi,xi) not in seen:
+                queue.append(path + [(yi, xi)])
+                seen.add((yi,xi))
+    if len(paths) == 1:
+        return(paths[0])
+    elif len(paths) > 1:
+        paths = sorted(paths, key = lambda k : len(k))
+        l_k = len(paths[0])
+        paths = [path for path in paths if len(path) == l_k]
 ###############################################################################
 
 def printMap(area, units):
