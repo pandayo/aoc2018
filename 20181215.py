@@ -86,7 +86,7 @@ def is_reachable(area, units, unit, range_squares):
     (s_y, s_x) = unit[1]["Position"]
     paths = {}
     for rs in range_squares:
-        paths[rs] = astar(maze, (s_y, s_x), rs)
+        paths[rs] = bfs(maze, (s_y, s_x), rs)
     return(paths)
 
 def find_attackable(pos, targets, debug = False):
@@ -107,24 +107,25 @@ def find_attackable(pos, targets, debug = False):
     return(attackable)
         
 def is_nearest(area, units, unit, reachable_squares):
-    closest = {}
+    closest = []
     distance = len(area)**2
     for rpos, rpath in reachable_squares.items():
         if rpath is None:
             continue
         rdis = len(rpath)-1
         if rdis < distance:
-            closest = {}
+            closest = []
             distance = rdis
-            closest[rpos] = rpath
+            closest.append((rpos, rpath))
         elif rdis == distance:
-            closest[rpos] = rpath
+            closest.append((rpos, rpath))
     if len(closest) > 0:
         return(closest)
 
 def chose_square(nearest_squares):
-    future_position = list(nearest_squares.keys())
-    return(nearest_squares[sorted(future_position)[0]][1])
+    l_k = sorted(nearest_squares, key = lambda v: v[0])[0][0]
+    n_s = sorted([v for v in nearest_squares if v[0] == l_k], key = lambda v: v[1][1])
+    return(n_s[0][1][1])
                     
 file_name = "input.txt"
 area = [[x for x in line] for line in open(file_name, "r").read().splitlines()]
@@ -188,8 +189,7 @@ while elves > 0 and goblins > 0:
                                         goblins -= 1
                                     del new_units[a]
     i += 1
-    if i % 100 == 0:
-        print(printMap(area, units))        
+    print(printMap(area, units))        
     units = new_units
 print(printMap(area, units))
 rounds = i-1
