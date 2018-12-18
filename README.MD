@@ -52,4 +52,4 @@ Whilst I got the right solution on the example input, I guess my a* runtime take
 Fun little puzzle
 
 ### 18th Dec ###
-Part II was obviously impossible to brute force, so I looked at the first 1000 Values and notices, that as of somewhere 700ish, values repeat. So I used to check in the range of 800:829 if a value is equal to 799, if so, it means it takes this long to go through a season, therefore, I can than calculate (1000000000-800) / *length_of_season* % 1 x distance. If I then add 800, I get an index of a product that is equal to the one 1000000000 has :)
+Part II was obviously impossible to brute force, so I looked at the first 1000 Values and notices, that as of somewhere 700ish, values repeat. So I used to check in the range of 800:829 if a value is equal to 799, if so, it means it takes this long to go through a season, therefore, I can than calculate int((1000000000-800) / *length_of_season* % 1 x *length_of_season*). If I then add 800, I get an index of a product that is equal to the one 1000000000 has :)
