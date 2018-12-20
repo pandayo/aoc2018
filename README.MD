@@ -56,3 +56,6 @@ Part II was obviously impossible to brute force, so I looked at the first 1000 V
 
 ### 19th Dec ###
 Can't wrap my head around part II. I uploaded my input this time, as you have to reverse engineer it in part II.  
+
+### 20th Dec ###
+I tried to get all possible ways from the regex, which was quite complicated, so instead, i build a cartesian coordinate system with (0,0) being the startpoint and each step adding a door and a coordinate in the system. A dict with the coordinates as key and a list of doors as value then got sorted by the maximum value of the minimum of each list. :)
