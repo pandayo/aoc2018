@@ -59,3 +59,7 @@ Can't wrap my head around part II. I uploaded my input this time, as you have to
 
 ### 20th Dec ###
 I tried to get all possible ways from the regex, which was quite complicated, so instead, i build a cartesian coordinate system with (0,0) being the startpoint and each step adding a door and a coordinate in the system. A dict with the coordinates as key and a list of doors as value then got sorted by the maximum value of the minimum of each list. :)
+
+### 21st Dec ###
+Yey, I'm in place 613 for part I :) Hard puzzle, you had to somewhat understand the condition, on which the program determinates by going through the source.
+Part II took 65 minutes of calculation. I think my source is suboptimal, as one could easily use less instructions for the loops, but I didn't :D
