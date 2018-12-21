@@ -133,9 +133,11 @@ for line in lines:
     
 values = do_stuff(cmdset)           
 
+# Part I
 print(datetime.now(),
-      sorted(values.items(), key = lambda v: v[1], reverse=True)[0])
+      sorted(values.items(), key = lambda v: v[1], reverse=False)[0])
 
+# Part II
 print(datetime.now(),
       sorted(values.items(), key = lambda v: v[1], reverse=True)[0])
 
