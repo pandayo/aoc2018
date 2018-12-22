@@ -63,3 +63,6 @@ I tried to get all possible ways from the regex, which was quite complicated, so
 ### 21st Dec ###
 Yey, I'm in place 613 for part I :) Hard puzzle, you had to somewhat understand the condition, on which the program determinates by going through the source.
 Part II took 65 minutes of calculation. I think my source is suboptimal, as one could easily use less instructions for the loops, but I didn't :D
+
+### 22nd Dec ###
+Could only beat the first puzzle. My CS-Knowledge isn't good enough for a custom shortest path algorithm on diverse contraints. Maybe on another day.
