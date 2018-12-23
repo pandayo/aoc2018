@@ -68,4 +68,4 @@ Part II took 65 minutes of calculation. I think my source is suboptimal, as one 
 Could only beat the first puzzle. My CS-Knowledge isn't good enough for a custom shortest path algorithm on diverse contraints. Maybe on another day.
 
 ### 23rd Dec ###
-Got rank 435 on part I. Second part was solved thanks to the code of reddit user /u/seligman99 which took a little adjustment for me to work.
+Got rank 435 on part I. Second part was solved thanks to the code of reddit user /u/seligman99 which took a little adjustment for me to work. Also I had the right idea, I did not know how to implement it properly. Therefore my ranking at this challenge is not representative and so my best ranking still is 1173 :(
