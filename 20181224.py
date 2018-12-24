@@ -18,8 +18,6 @@ def create_army(at, line, ID, boost = 1):
     army["number"] = int(numbers[0])
     army["ini"] = int(numbers[-1])
     army["att"] = int(numbers[-6])
-    if at == "imm":
-        army["att"] *= boost
     # damage type
     army["damage"] = numbers[-5]
     army["target"] = None
@@ -57,7 +55,7 @@ def select_target(army, targets, already_targeted):
                 best_ep = effective_power(target)
                 best_ini = target["ini"]
                 best_damage = dmg
-            elif dmg == best_damage:
+            elif dmg == best_damage and dmg != 0:
                 if best_ep < effective_power(target):
                     best_target = target["ID"]
                     best_ep = effective_power(target)
@@ -86,6 +84,72 @@ def attack(army, armies):
 ##    else:
 ##        print("Army {0} already is dead.".format(army["ID"]))
 
+def run_combat(armies, boost = 0):
+
+    for army in armies:
+        if army["at"] == "Imm":
+            army["att"] += boost
+
+    imm = [army for army in armies if army["at"] == "Imm" and army["number"] > 0]
+    inf = [army for army in armies if army["at"] == "Inf" and army["number"] > 0]
+
+    counter = 1
+
+    army_numbers = sum([army["number"] for army in armies])
+
+    while imm and inf:
+        armies = sorted(armies, key = lambda a: (effective_power(a), a["ini"]),
+                        reverse = True)
+
+    ##    print("-----Round {0:5d}-----".format(counter))
+
+    ##    print("Immune System:")
+    ##    for army in imm:
+    ##        print("{0} contains {1} units.".format(army["ID"], army["number"]))
+    ##    
+    ##    print("Infection:")
+    ##    for army in inf:
+    ##        print("{0} contains {1} units.".format(army["ID"], army["number"]))
+
+        #print("Target Selection:")
+        
+        target_ids = set()
+        for army in armies:
+            #print(army)
+            if army["at"] == "Imm":
+                army["target"] = select_target(army, inf, target_ids)
+                target_ids.add(army["target"])
+            else:
+                army["target"] = select_target(army, imm, target_ids)
+                target_ids.add(army["target"])
+    ##    print("Attacking:")
+        
+        armies = sorted(armies, key = lambda a: a["ini"], reverse = True)
+        for army in armies:
+            if not army["target"] is None:
+                attack(army, armies)
+            #else:
+            #    print("No valid target for this army")
+        narmies = [target for target in armies if target["number"] > 0]
+        armies = narmies
+        
+        imm = sorted([army for army in armies if army["at"] == "Imm"
+                      and army["number"] > 0],
+                     key = lambda a: a["ID"])
+        inf = sorted([army for army in armies if army["at"] == "Inf"
+                      and army["number"] > 0],
+                     key = lambda a: a["ID"])
+
+        counter += 1
+
+        if army_numbers == sum([army["number"] for army in armies]):
+            return 0, "stalemate"
+        else:
+            army_numbers = sum([army["number"] for army in armies])
+
+    winner = sum([army["number"] for army in armies])
+    return winner, armies[0]["at"]
+
 
 lines = open("input.txt").read().splitlines()
 
@@ -103,62 +167,60 @@ for line in lines:
         armies.append(army)
         group += 1
 
-imm = [army for army in armies if army["at"] == "Imm" and army["number"] > 0]
-inf = [army for army in armies if army["at"] == "Inf" and army["number"] > 0]
 
-counter = 1
 
-while imm and inf:
-    armies = sorted(armies, key = lambda a: (effective_power(a), a["ini"]),
-                    reverse = True)
+print(run_combat(armies))
 
-##    print("-----Round {0:5d}-----".format(counter))
+winner = None
+l_w = None
+boost_min = 0
+boost_max = 2
 
-##    print("Immune System:")
-##    for army in imm:
-##        print("{0} contains {1} units.".format(army["ID"], army["number"]))
-##    
-##    print("Infection:")
-##    for army in inf:
-##        print("{0} contains {1} units.".format(army["ID"], army["number"]))
+while winner != "Imm":
+    armytype = None
+    armies = []
+    group = 1
 
-    #print("Target Selection:")
-    
-    target_ids = set()
-    for army in armies:
-        #print(army)
-        if army["at"] == "Imm":
-            army["target"] = select_target(army, inf, target_ids)
-            target_ids.add(army["target"])
-        else:
-            army["target"] = select_target(army, imm, target_ids)
-            target_ids.add(army["target"])
-##    print("Attacking:")
-    
-    armies = sorted(armies, key = lambda a: a["ini"], reverse = True)
-    for army in armies:
-        if not army["target"] is None:
-            attack(army, armies)
-        #else:
-        #    print("No valid target for this army")
-    narmies = [target for target in armies if target["number"] > 0]
-    armies = narmies
-    
-    imm = sorted([army for army in armies if army["at"] == "Imm"
-                  and army["number"] > 0],
-                 key = lambda a: a["ID"])
-    inf = sorted([army for army in armies if army["at"] == "Inf"
-                  and army["number"] > 0],
-                 key = lambda a: a["ID"])
+    for line in lines:
+        if line == "Immune System:":
+            armytype = "Imm"
+        elif line == "Infection:":
+            armytype = "Inf"
+        elif line != "":
+            army = create_army(armytype, line, group)
+            armies.append(army)
+            group += 1
 
-    counter += 1
+    boost_min = boost_max
+    boost_max *= 2
+    army, winner = run_combat(armies, boost_max)
 
-    
+boost = (boost_max)
 
-winner = 0
+while boost_max - boost_min >= 1:
 
-for army in armies:
-    winner += army["number"]
+    if winner == "Inf":
+        boost_min = boost
+    elif winner == "stalemate":
+        boost_min += 2
+    else:
+        boost_max = boost
 
-print(winner)
-        
+    boost = boost_min + (boost_max - boost_min) // 2
+
+    armytype = None
+    armies = []
+    group = 1
+
+    for line in lines:
+        if line == "Immune System:":
+            armytype = "Imm"
+        elif line == "Infection:":
+            armytype = "Inf"
+        elif line != "":
+            army = create_army(armytype, line, group)
+            armies.append(army)
+            group += 1
+    army, winner = run_combat(armies, boost)
+
+print(army, winner, boost)
