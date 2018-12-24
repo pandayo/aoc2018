@@ -76,3 +76,6 @@ Got rank 435 on part I. Second part was solved thanks to the code of reddit user
 It's christmas today and I'm glad, reddit could help me with this one. If an unit dealt a maximum of 0 damage to all enemies, it should not select an enemy as target. :)
 
 Part II was a binary search optimization problem.
+
+### 10th Dec ###
+Took another go at the 10th December, as I had time today. I read some user at reddit got a working solution by minimizing the bounding boxes of the input, so I did the same using numpy :)
