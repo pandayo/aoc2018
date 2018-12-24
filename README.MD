@@ -37,6 +37,7 @@ Learned some numpy today :)
 
 ### 12th Dec ###
 Puzzle was a type of Game of Life. The most confusing was I had to add the negative indices as well, which was not coming out of the instructions initially. Luckily, this time I'm not the only one having this problem :D
+
 As usually since day 9, I had to get help with the approach to part II, solving it afterwards was pretty straight forward :)
 
 ### 13th Dec ###
@@ -62,6 +63,7 @@ I tried to get all possible ways from the regex, which was quite complicated, so
 
 ### 21st Dec ###
 Yey, I'm in place 613 for part I :) Hard puzzle, you had to somewhat understand the condition, on which the program determinates by going through the source.
+
 Part II took 65 minutes of calculation. I think my source is suboptimal, as one could easily use less instructions for the loops, but I didn't :D
 
 ### 22nd Dec ###
@@ -69,3 +71,8 @@ Could only beat the first puzzle. My CS-Knowledge isn't good enough for a custom
 
 ### 23rd Dec ###
 Got rank 435 on part I. Second part was solved thanks to the code of reddit user /u/seligman99 which took a little adjustment for me to work. Also I had the right idea, I did not know how to implement it properly. Therefore my ranking at this challenge is not representative and so my best ranking still is 1173 :(
+
+### 24th Dec ###
+It's christmas today and I'm glad, reddit could help me with this one. If an unit dealt a maximum of 0 damage to all enemies, it should not select an enemy as target. :)
+
+Part II was a binary search optimization problem.
